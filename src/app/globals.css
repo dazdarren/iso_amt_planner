@@ -1,59 +1,11 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-@layer base {
-  :root {
-    /* Linear-inspired color palette */
-    --background: 250 250 252;
-    --foreground: 15 15 17;
-    --muted: 240 244 248;
-    --muted-foreground: 100 116 139;
-    --border: 226 232 240;
-    --accent: 99 102 241;
-    --accent-foreground: 255 255 255;
-    --destructive: 239 68 68;
-    --success: 34 197 94;
-  }
-
-  * {
-    @apply border-slate-200;
-  }
-
-  body {
-    @apply bg-[rgb(var(--background))] text-[rgb(var(--foreground))];
-    font-feature-settings: 'rlig' 1, 'calt' 1;
-  }
-
-  /* Smooth font rendering */
-  html {
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
+/* Smooth font rendering */
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 }
 
-@layer components {
-  /* Custom input styles */
-  .input-modern {
-    @apply bg-white border-slate-200 text-slate-900 placeholder:text-slate-400
-           focus:border-indigo-500 focus:ring-2 focus:ring-indigo-500/20
-           transition-all duration-200;
-  }
-
-  /* Modern button */
-  .btn-primary {
-    @apply bg-gradient-to-r from-indigo-600 to-indigo-700
-           hover:from-indigo-700 hover:to-indigo-800
-           text-white font-medium
-           shadow-lg shadow-indigo-500/25 hover:shadow-xl hover:shadow-indigo-500/30
-           transition-all duration-200
-           active:scale-[0.98];
-  }
-
-  /* Card styles */
-  .card-modern {
-    @apply bg-white border border-slate-200
-           shadow-sm hover:shadow-md
-           transition-all duration-200;
-  }
+body {
+  font-feature-settings: 'rlig' 1, 'calt' 1;
 }
