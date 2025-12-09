@@ -173,51 +173,52 @@ export default function ISOCalculatorForm() {
             )}
           </div>
         </div>
+        </div>
 
         {/* ISO Details */}
         <div className="space-y-4">
           <h3 className="text-lg font-semibold text-gray-900">ISO Stock Details</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="isoStrike" className="block text-sm font-medium text-gray-700 mb-1">
-              ISO Strike Price
-            </label>
-            <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
-              <input
-                {...register('isoStrike')}
-                type="number"
-                id="isoStrike"
-                step="0.01"
-                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="0.50"
-              />
+            <div>
+              <label htmlFor="isoStrike" className="block text-sm font-medium text-gray-700 mb-1">
+                ISO Strike Price
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <input
+                  {...register('isoStrike')}
+                  type="number"
+                  id="isoStrike"
+                  step="0.01"
+                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="0.50"
+                />
+              </div>
+              {errors.isoStrike && (
+                <p className="mt-1 text-sm text-red-600">{errors.isoStrike.message}</p>
+              )}
             </div>
-            {errors.isoStrike && (
-              <p className="mt-1 text-sm text-red-600">{errors.isoStrike.message}</p>
-            )}
-          </div>
 
-          <div>
-            <label htmlFor="isoFmv" className="block text-sm font-medium text-gray-700 mb-1">
-              Current Fair Market Value (FMV)
-            </label>
-            <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
-              <input
-                {...register('isoFmv')}
-                type="number"
-                id="isoFmv"
-                step="0.01"
-                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="25.00"
-              />
+            <div>
+              <label htmlFor="isoFmv" className="block text-sm font-medium text-gray-700 mb-1">
+                Current Fair Market Value (FMV)
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <input
+                  {...register('isoFmv')}
+                  type="number"
+                  id="isoFmv"
+                  step="0.01"
+                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="25.00"
+                />
+              </div>
+              {errors.isoFmv && (
+                <p className="mt-1 text-sm text-red-600">{errors.isoFmv.message}</p>
+              )}
             </div>
-            {errors.isoFmv && (
-              <p className="mt-1 text-sm text-red-600">{errors.isoFmv.message}</p>
-            )}
-          </div>
           </div>
         </div>
 
@@ -226,45 +227,45 @@ export default function ISOCalculatorForm() {
           <h3 className="text-lg font-semibold text-gray-900">Exercise Details</h3>
 
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <div>
-            <label htmlFor="totalSharesAvailable" className="block text-sm font-medium text-gray-700 mb-1">
-              Total Shares Available to Exercise
-            </label>
-            <input
-              {...register('totalSharesAvailable')}
-              type="number"
-              id="totalSharesAvailable"
-              step="1"
-              className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-              placeholder="20000"
-            />
-            {errors.totalSharesAvailable && (
-              <p className="mt-1 text-sm text-red-600">{errors.totalSharesAvailable.message}</p>
-            )}
-          </div>
-
-          <div>
-            <label htmlFor="targetAmtBudget" className="block text-sm font-medium text-gray-700 mb-1">
-              Target AMT Budget
-            </label>
-            <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+            <div>
+              <label htmlFor="totalSharesAvailable" className="block text-sm font-medium text-gray-700 mb-1">
+                Total Shares Available to Exercise
+              </label>
               <input
-                {...register('targetAmtBudget')}
+                {...register('totalSharesAvailable')}
                 type="number"
-                id="targetAmtBudget"
+                id="totalSharesAvailable"
                 step="1"
-                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                placeholder="15000"
+                className="w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                placeholder="20000"
               />
+              {errors.totalSharesAvailable && (
+                <p className="mt-1 text-sm text-red-600">{errors.totalSharesAvailable.message}</p>
+              )}
             </div>
-            {errors.targetAmtBudget && (
-              <p className="mt-1 text-sm text-red-600">{errors.targetAmtBudget.message}</p>
-            )}
-            <p className="mt-1 text-xs text-gray-500">
-              Maximum AMT you're willing to pay this year
-            </p>
-          </div>
+
+            <div>
+              <label htmlFor="targetAmtBudget" className="block text-sm font-medium text-gray-700 mb-1">
+                Target AMT Budget
+              </label>
+              <div className="relative">
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <input
+                  {...register('targetAmtBudget')}
+                  type="number"
+                  id="targetAmtBudget"
+                  step="1"
+                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  placeholder="15000"
+                />
+              </div>
+              {errors.targetAmtBudget && (
+                <p className="mt-1 text-sm text-red-600">{errors.targetAmtBudget.message}</p>
+              )}
+              <p className="mt-1 text-xs text-gray-500">
+                Maximum AMT you're willing to pay this year
+              </p>
+            </div>
           </div>
         </div>
 
