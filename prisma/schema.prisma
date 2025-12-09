@@ -1,0 +1,72 @@
+// Prisma schema for Vercel Postgres
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL") // Required for Vercel Postgres
+}
+
+model PurchaseSession {
+  id String @id @default(cuid())
+
+  // Stripe Integration
+  stripeSessionId       String?  @unique
+  stripePaymentIntentId String?  @unique
+  paymentStatus         String   @default("pending") // pending | completed | failed
+
+  // User Input (stored for reproducibility)
+  email                String
+  taxYear              Int
+  filingStatus         String   // single | married
+  ordinaryIncome       Float
+  itemizedDeductions   Float    @default(0)
+  isoStrike            Float
+  isoFmv               Float
+  totalSharesAvailable Int
+  targetAmtBudget      Float
+
+  // Computed Results (cached)
+  maxShares            Int
+  projectedAmt         Float
+  projectedTotalTax    Float
+  bargainElement       Float
+
+  // Tiles (25%, 50%, 100%)
+  tile25Shares         Int?
+  tile25Cash           Float?
+  tile25Bargain        Float?
+  tile25Amt            Float?
+
+  tile50Shares         Int?
+  tile50Cash           Float?
+  tile50Bargain        Float?
+  tile50Amt            Float?
+
+  tile100Shares        Int?
+  tile100Cash          Float?
+  tile100Bargain       Float?
+  tile100Amt           Float?
+
+  // Sensitivity Analysis
+  sensitivityDownFmv    Float?
+  sensitivityDownShares Int?
+  sensitivityUpFmv      Float?
+  sensitivityUpShares   Int?
+
+  // Email Tracking
+  emailSent            Boolean  @default(false)
+  emailSentAt          DateTime?
+
+  // Timestamps
+  createdAt            DateTime @default(now())
+  updatedAt            DateTime @updatedAt
+  paidAt               DateTime?
+
+  @@index([stripeSessionId])
+  @@index([email])
+  @@index([createdAt])
+}

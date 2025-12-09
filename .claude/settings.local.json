@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(find:*)",
+      "Bash(pnpm create:*)",
+      "Bash(npx create-next-app:*)",
+      "Bash(sw_vers:*)",
+      "Bash(npm install:*)",
+      "Bash(npm test:*)",
+      "Bash(cat:*)"
+    ]
+  }
+}
