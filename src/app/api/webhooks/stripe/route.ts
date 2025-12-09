@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { prisma } from '@/lib/prisma';
+import { sendResultsEmail } from '@/lib/email/send-results-email';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2024-12-18.acacia',
@@ -65,8 +66,22 @@ export async function POST(request: Request) {
 
           console.log('Purchase session updated:', updatedSession.id);
 
-          // TODO: Send email with results when email integration is set up
-          // await sendResultsEmail(updatedSession);
+          // Send email with results
+          const emailSent = await sendResultsEmail(updatedSession);
+
+          // Update email tracking
+          if (emailSent) {
+            await prisma.purchaseSession.update({
+              where: { id: purchaseSessionId },
+              data: {
+                emailSent: true,
+                emailSentAt: new Date(),
+              },
+            });
+            console.log('Results email sent to:', updatedSession.email);
+          } else {
+            console.warn('Failed to send results email to:', updatedSession.email);
+          }
 
         } catch (dbError) {
           console.error('Failed to update purchase session:', dbError);
