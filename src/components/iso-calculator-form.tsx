@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 const formSchema = z.object({
   email: z.string().email('Please enter a valid email address'),
-  filingStatus: z.enum(['single', 'married']),
+  filingStatus: z.enum(['single', 'married', 'married_separate', 'head_of_household', 'qualifying_widow']),
   ordinaryIncome: z.coerce
     .number()
     .min(0, 'Income must be positive')
@@ -122,12 +122,15 @@ export default function ISOCalculatorForm() {
           >
             <option value="single">Single</option>
             <option value="married">Married Filing Jointly (MFJ)</option>
+            <option value="married_separate">Married Filing Separately (MFS)</option>
+            <option value="head_of_household">Head of Household (HOH)</option>
+            <option value="qualifying_widow">Qualifying Surviving Spouse (QSS)</option>
           </select>
           {errors.filingStatus && (
             <p className="mt-1 text-sm text-red-600">{errors.filingStatus.message}</p>
           )}
-          <p className="mt-1 text-xs text-gray-500">
-            Note: MFS, HOH, and QSS filing statuses coming soon
+          <p className="mt-1 text-xs text-orange-600 font-medium">
+            ⚠️ Note: Only Single and MFJ are fully supported. Other statuses will default to Single.
           </p>
         </div>
 
@@ -138,13 +141,13 @@ export default function ISOCalculatorForm() {
               Ordinary Income (W-2, etc.)
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none text-sm">$</span>
               <input
                 {...register('ordinaryIncome')}
                 type="number"
                 id="ordinaryIncome"
                 step="1"
-                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="180000"
               />
             </div>
@@ -158,13 +161,13 @@ export default function ISOCalculatorForm() {
               Itemized Deductions (optional)
             </label>
             <div className="relative">
-              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+              <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none text-sm">$</span>
               <input
                 {...register('itemizedDeductions')}
                 type="number"
                 id="itemizedDeductions"
                 step="1"
-                className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                 placeholder="0"
               />
             </div>
@@ -185,13 +188,13 @@ export default function ISOCalculatorForm() {
                 ISO Strike Price
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none text-sm">$</span>
                 <input
                   {...register('isoStrike')}
                   type="number"
                   id="isoStrike"
                   step="0.01"
-                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="0.50"
                 />
               </div>
@@ -205,13 +208,13 @@ export default function ISOCalculatorForm() {
                 Current Fair Market Value (FMV)
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none text-sm">$</span>
                 <input
                   {...register('isoFmv')}
                   type="number"
                   id="isoFmv"
                   step="0.01"
-                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="25.00"
                 />
               </div>
@@ -249,13 +252,13 @@ export default function ISOCalculatorForm() {
                 Target AMT Budget
               </label>
               <div className="relative">
-                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none">$</span>
+                <span className="absolute left-3 top-2.5 text-gray-500 pointer-events-none text-sm">$</span>
                 <input
                   {...register('targetAmtBudget')}
                   type="number"
                   id="targetAmtBudget"
                   step="1"
-                  className="w-full pl-8 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                  className="w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                   placeholder="15000"
                 />
               </div>
