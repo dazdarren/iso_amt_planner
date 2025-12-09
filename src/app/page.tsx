@@ -11,7 +11,7 @@ export default function Home() {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-indigo-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-indigo-500"></span>
             </span>
-            2024 Tax Year Calculator
+            2025 Tax Year Calculator
           </div>
 
           <h1 className="text-5xl sm:text-6xl font-bold text-slate-900 mb-6 tracking-tight">
