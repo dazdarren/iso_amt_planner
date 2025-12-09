@@ -58,14 +58,30 @@ export default function ISOCalculatorForm() {
     setError(null);
 
     try {
-      // TODO: Call /api/checkout endpoint
-      console.log('Form data:', data);
+      // Call checkout API
+      const response = await fetch('/api/checkout', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(data),
+      });
 
-      // Placeholder: This will redirect to Stripe checkout
-      alert('Form submitted! Next: Implement Stripe checkout');
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Failed to create checkout session');
+      }
+
+      const { url } = await response.json();
+
+      // Redirect to Stripe Checkout
+      if (url) {
+        window.location.href = url;
+      } else {
+        throw new Error('No checkout URL returned');
+      }
     } catch (err) {
       setError(err instanceof Error ? err.message : 'Something went wrong');
-    } finally {
       setIsSubmitting(false);
     }
   };
