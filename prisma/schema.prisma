@@ -1,12 +1,15 @@
-// Prisma schema for Vercel Postgres
+// Prisma schema - uses SQLite locally, PostgreSQL in production
+// Local: DATABASE_URL="file:./dev.db"
+// Production: Use Vercel Postgres URLs
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
+  directUrl = env("DIRECT_URL")
 }
 
 model PurchaseSession {
